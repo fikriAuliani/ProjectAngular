@@ -1,0 +1,16 @@
+.sidenav-left {
+    width: 300px;
+  }
+  .admin.container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+  }
+  img {
+    width: 150px;
+    height: 50px;
+}
