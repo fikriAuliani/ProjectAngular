@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin/admin.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './Buku-fav/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialDesign } from '../material/material.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PinjamComponent } from './pinjam/pinjam.component';
+import { TambahBukuComponent } from './tambah-buku/tambah-buku.component';
+import { FormsModule } from '@angular/forms';
+import { DetailBukuComponent } from './detail-buku/detail-buku.component';
 
 const routes: Routes = [
   {
@@ -38,12 +41,15 @@ const routes: Routes = [
     AdminComponent,
     DashboardComponent,
     ProfileComponent,
-    PinjamComponent
+    PinjamComponent,
+    TambahBukuComponent,
+    DetailBukuComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialDesign
+    MaterialDesign,
+    FormsModule
   ]
 })
 export class AdminModule { }

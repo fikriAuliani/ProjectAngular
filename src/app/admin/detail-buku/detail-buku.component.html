@@ -1,0 +1,35 @@
+<h3 mat-dialog-title>
+    Detail Buku
+ </h3>
+<div mat-dialog-content>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Judul</mat-label>
+        <input matInput [(ngModel)]="data.title">      
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Penulis</mat-label>
+        <input matInput [(ngModel)]="data.author" >     
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Penerbit</mat-label>
+        <input matInput [(ngModel)]="data.publisher" >     
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Tahun Terbit</mat-label>
+        <input matInput [(ngModel)]="data.year" >     
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>ISBN</mat-label>
+        <input matInput [(ngModel)]="data.isbn" >     
+    </mat-form-field>
+    <mat-form-field  class="example-full-width" appearance="outline" style="width: 100%;">
+        <mat-label>Sinopsis</mat-label>
+        <textarea matInput [(ngModel)]="data.sinopsis" ></textarea>    
+    </mat-form-field>
+</div>
+<mat-dialog-actions>
+    <span class="spacer"></span>
+    <button mat-button mat-dialog-close>Tutup</button>
+  </mat-dialog-actions>
+
+ 
