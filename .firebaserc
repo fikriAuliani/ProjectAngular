@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "library-book-8bcbc": {
+      "hosting": {
+        "Angular": [
+          "library-book-8bcbc"
+        ]
+      }
+    }
+  }
+}

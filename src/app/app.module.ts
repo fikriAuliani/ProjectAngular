@@ -7,11 +7,18 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 //Material design
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import { MaterialDesign } from './material/material.module';
+
+//firebase
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -27,11 +34,14 @@ import { MaterialDesign } from './material/material.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     MatToolbarModule,
     MatCardModule,
-    MaterialDesign
+    MaterialDesign,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

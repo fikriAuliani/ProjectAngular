@@ -1,8 +1,8 @@
 <div class="uk-flex uk-flex-center" style="background-color: aliceblue;">
-  <img src="/assets/Logo.png" alt="logo">
+  <img src="/assets/Logo.jpg" alt="logo">
 </div>
 <div class="uk-flex uk-flex-middle uk-flex-center uk-height-viewport" style="background-color: aliceblue;">  
-    <mat-card class="uk-width-1-3@m">
+    <mat-card class="uk-width-1-3@m uk-width-1-2@s">
         <div class="uk-flex uk-flex-center uk-margin-medium-bottom">
             <h3>Register</h3>
         </div>
@@ -13,21 +13,27 @@
           </mat-form-field>
         <mat-form-field class="uk-width-1-1" appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Ex. email@domain.com">
+            <input matInput placeholder="Ex. email@domain.com" [(ngModel)]="user.email">
           </mat-form-field>
           <mat-form-field class="uk-width-1-1" appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="Your password">
+            <input matInput [type]="hide ? 'password':'text'" placeholder="Your password" [(ngModel)]="user.password">
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{hide ? 'visibility_off':'visibility'}}</mat-icon>
+            </button>  
           </mat-form-field>
           <mat-form-field class="uk-width-1-1" appearance="outline">
             <mat-label>Re-type Password</mat-label>
-            <input matInput type="password" placeholder="Re-type Your password">
+            <input matInput [type]="hide ? 'password':'text'" placeholder="Re-type Your password">
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{hide ? 'visibility_off':'visibility'}}</mat-icon>
+            </button>  
           </mat-form-field>
           <div class="uk-flex uk-flex-right">
               <div class="uk-width-expand">
                 <button mat-button routerLink="/login">Sudah Punya Akun</button>
               </div>
-              <button mat-raised-button color="primary">REGISTER</button>
+              <button mat-raised-button color="primary" (click)="register(user)" [disabled]="loading">{{ loading ? 'TUNGGU':'REGISTER'}}</button>
           </div>
       </mat-card-content>
     </mat-card>
