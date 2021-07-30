@@ -9,6 +9,8 @@ import { PinjamComponent } from './pinjam/pinjam.component';
 import { TambahBukuComponent } from './tambah-buku/tambah-buku.component';
 import { FormsModule } from '@angular/forms';
 import { DetailBukuComponent } from './detail-buku/detail-buku.component';
+import { BorrowComponent } from './borrow/borrow.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,10 @@ const routes: Routes = [
       {
         path:'dashboard',
         component:DashboardComponent
+      },
+      {
+        path:'home',
+        component:HomeComponent
       },
       {
         path:'profile',
@@ -43,7 +49,9 @@ const routes: Routes = [
     ProfileComponent,
     PinjamComponent,
     TambahBukuComponent,
-    DetailBukuComponent
+    DetailBukuComponent,
+    BorrowComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

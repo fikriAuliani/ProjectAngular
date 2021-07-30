@@ -27,7 +27,7 @@
                     <td>{{book.isbn}}</td>
                     <td align="right">
                         <button mat-button color="primary"(click)="Detailbuku(book,idx)" >Detail Buku</button>
-                        <button mat-button color="warn"(click)="hapusbuku(idx)">Hapus</button>
+                        <button mat-button color="warn"(click)="hapusbuku(book.id,idx)">Hapus</button>
                     </td>
                 </tr>
             </tbody>

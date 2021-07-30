@@ -4,18 +4,17 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-tambah-buku',
-  templateUrl: './tambah-buku.component.html',
-  styleUrls: ['./tambah-buku.component.css']
+  selector: 'app-borrow',
+  templateUrl: './borrow.component.html',
+  styleUrls: ['./borrow.component.css']
 })
-export class TambahBukuComponent implements OnInit {
+export class BorrowComponent implements OnInit {
 
   userData: any = {};
 
   constructor(
-    public dialogRef:MatDialogRef<TambahBukuComponent>,
-   @Inject(MAT_DIALOG_DATA) public data: any,
-
+  public dialogRef:MatDialogRef<BorrowComponent>,
+  @Inject(MAT_DIALOG_DATA) public data: any,
    public db: AngularFirestore,
    public auth: AngularFireAuth
 
@@ -36,18 +35,18 @@ export class TambahBukuComponent implements OnInit {
       //simpan ke firebase
       let doc = new Date().getTime().toString();
       this.data.uid = this.userData.uid;
-      this.db.collection('books').doc(doc).set(this.data).then(res=>{
+      this.db.collection('borrow').doc(doc).set(this.data).then(res=>{
       //this.api.post('books', this.data).subscribe(result=>{
         this.dialogRef.close(this.data);
+        alert('Buku berhasil dipinjam');
         this.loading=false;
-        alert('Berhasil menambahkan buku ke favorite');
       }).catch(er=>{
         console.log(er);
         this.loading=false;
         alert('Tidak dapat menyimpan data');
       })  
     } else{
-      this.db.collection('books').doc(this.data.id).update(this.data).then(res=>{
+      this.db.collection('borrow').doc(this.data.id).update(this.data).then(res=>{
         this.dialogRef.close(this.data);
         this.loading=false;
       }).catch(er=>{
@@ -58,3 +57,4 @@ export class TambahBukuComponent implements OnInit {
     }
   }
 }
+

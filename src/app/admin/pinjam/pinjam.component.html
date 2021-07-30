@@ -1,22 +1,41 @@
-<ng-container>
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Pinjam Buku</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <table class="uk-table uk-table-middle uk-table-divider">
-                <thead> 
-                    <th></th>               
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Penulis</th>
-                    <th>Penerbit</th>
-                    <th>Tahun Terbit</th>
-                    <th>ISBN</th>
-                    <th align="right">#</th>
-                </thead>
-            </table>
-        </mat-card-content>
-    </mat-card>
-</ng-container>
- 
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Pinjam Buku</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="uk-flex">
+            <span class="uk-width-expand"></span>
+            <button mat-flat-button color="primary" (click)="pinjambuku({},-1)">Tambah Pinjam Buku</button>
+        </div>
+        <table class="uk-table uk-table-middle uk-table-divider">
+            <thead>                
+                <th>No</th>
+                <th>Judul</th>
+                <th>Penulis</th>
+                <th>Penerbit</th>
+                <th>Tahun Terbit</th>
+                <th>ISBN</th>
+                <th>Jumlah Buku</th>
+                <th>Tanggal Pinjam</th>
+                <th>Tanggal Kembali</th>
+                <th align="right">#</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of borrow; let idx=index">
+                    <td>{{idx + 1}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.publisher}}</td>
+                    <td>{{book.year}}</td>
+                    <td>{{book.isbn}}</td>
+                    <td>{{book.jml}}</td>
+                    <td>{{book.pjm}}</td>
+                    <td>{{book.kbl}}</td>
+                    <td align="right">
+                        <button mat-button color="primary"(click)="kembalikanbuku(book.id,idx)">Kembalikan</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

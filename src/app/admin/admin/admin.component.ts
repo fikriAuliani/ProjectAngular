@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -6,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    public router:Router,
+    public auth: AngularFireAuth
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,5 +26,13 @@ export class AdminComponent implements OnInit {
     },
   ]
 
-
+  logout() {
+    this.auth.signOut();
+    let conf=confirm('Keluar Aplikasi?');
+    if(conf)
+    {
+      localStorage.removeItem('appToken');
+      this.router.navigate(['/login']);
+    }
+  }
 }

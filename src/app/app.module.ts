@@ -19,6 +19,7 @@ import { MaterialDesign } from './material/material.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { WelcomeComponent } from './auth/welcome/welcome.component';
 
 
 
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     ForgotComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

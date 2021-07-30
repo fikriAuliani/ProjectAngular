@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailBukuComponent } from '../detail-buku/detail-buku.component';
 import { TambahBukuComponent } from '../tambah-buku/tambah-buku.component';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,49 +11,46 @@ import { TambahBukuComponent } from '../tambah-buku/tambah-buku.component';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  userData: any = {};
   title:any;
   book:any={};
   books:any=[];
 
   constructor(
-    public dialog:MatDialog
+    public dialog:MatDialog,
+    public db: AngularFirestore,
+    public auth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
-    this.title='Product';
-    this.book={
-      title:'Pengejar Senja',
-        author:'Tere Liye',
-        publisher:'Pelangi Studio',
-        year:2018,
-        isbn:'3298379424',
-    };
-    this.getBooks();
-    }
 
+   //memperbarui variabel book
+    this.title='Product';
+    this.auth.user.subscribe(user=>{
+      this.userData = user;
+      this.getBooks();
+    });
+
+  }
+
+  loading:boolean | undefined;
+  //fungsi ambil data
     getBooks()
     {
-      this.books=[
-        {
-          title:'Pengejar Senja',
-          author:'Tere Liye',
-          publisher:'Pelangi Studio',
-          year:2018,
-          isbn:'3298379424',
-          sinopsis:'Katakan kepada masa lalu kita adalah cerita yang telah usai.'
-        },
-        {
-          title:'Detik Waktu',
-          author:'Renata Nagara',
-          publisher:'Jembatan Digital',
-          year:2020,
-          isbn:'57983323455',
-          sinopsis:'Pada sebuah garis waktu yang merangkak maju, akan ada saatnya kau ingin melompat mundur pada titik-titik kenangan tertentu.Maka, ikhlaskan saja kalau begitu. Karena sesungguhnya, yang lebih menyakitkan dari melepaskan sesuatu adalah berpegangan pada sesuatu yang menyakitimu secara perlahan.'
-        }
-      ];
+      this.loading=true;
+      this.db.collection('books',ref=>{
+        return ref.where('uid','==', this.userData.uid);
+      }).valueChanges({idField : 'id'}).subscribe(res=>{
+        console.log(res);
+        this.books=res;
+        this.loading=false;
+      },err=>{
+        this.loading=false;
+        alert('Ada masalah saat mengambil data, coba lagi');
+      });
     }
 
-  tambahbuku(data: any,idx: number)
+  tambahbuku(data: any,idx: any)
   {
     let dialog=this.dialog.open(TambahBukuComponent, {
       width:'400px',
@@ -85,11 +84,20 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-hapusbuku(idx: any)
- {
+  loadingDelete:any={};
+  hapusbuku(id: any, idx: any)
+  {
    var conf=confirm('Apakah anda yakin menghapus buku dari favorite?');
-   if(conf)
-   this.books.splice(idx,1);
- }
+   if (conf)
+    {
+      this.db.collection('books').doc(id).delete().then(res=>{
+        this.books.splice(idx,1);
+        this.loadingDelete[idx]=false;
+      }).catch(err=>{
+        this.loadingDelete[idx]=false;
+        alert('Tidak dapat menghapus data');
+      });
+    }
+  }
 
-}
+ }

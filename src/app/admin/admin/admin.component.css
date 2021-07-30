@@ -10,7 +10,16 @@
     left: 0;
     right: 0;
   }
+  
   img {
     width: 150px;
     height: 50px;
 }
+
+input,label {
+  display: flex;
+  width: 800px;
+  height: 32px;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+

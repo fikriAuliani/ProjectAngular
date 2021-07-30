@@ -6,11 +6,20 @@
         </button>
         <span><img src="/assets/Logo.jpg" alt="logo"></span>
         <div class="uk-width-expand"></div>
-            <mat-icon routerLink="/admin/profile" matListIcon>account_circle</mat-icon>
-        <button mat-button>Logout</button>
+        <input matInput placeholder=" Search" type="search">
+            <button mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+        <div class="example-button-container">
+            <button mat-icon-button>
+              <mat-icon routerLink="/admin/profile">account_circle</mat-icon>
+            </button>
+          </div>
+        <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
     <!--end toolbar-->
-    
+
+    <!--sidenav-->
     <mat-sidenav-container class="admin-container">
     
       <mat-sidenav 
@@ -22,6 +31,10 @@
       [fixedBottomGap]="0">
     
     <mat-nav-list>
+        <mat-list-item routerLink="/admin/home">
+            <mat-icon matListIcon>home</mat-icon>
+            <h3 matLine>Beranda</h3>
+        </mat-list-item>
         <mat-list-item routerLink="/admin/profile">
             <mat-icon matListIcon>person_outline</mat-icon>
             <h3 matLine>Profile</h3>
@@ -31,7 +44,7 @@
             <h3 matLine>Buku Favorite</h3>
         </mat-list-item>
         <mat-list-item routerLink="/admin/pinjam">
-            <mat-icon matListIcon>library_books</mat-icon>
+            <mat-icon matListIcon>menu_book</mat-icon>
             <h3 matLine>Pinjam Buku</h3>
         </mat-list-item>
     </mat-nav-list>
